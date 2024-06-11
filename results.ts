@@ -29,9 +29,7 @@ async function getOverrides(): Promise<Overrides> {
         fs.createReadStream('input/overrides.csv')
         .pipe(parser)
         .on('data', (record: string[]) => {
-            console.log(record);
             overrides[record[0]] = record.slice(1, record.length)
-            console.log(record)
         })
         .on('error', (err) => {
             reject(err)
@@ -43,6 +41,8 @@ async function getOverrides(): Promise<Overrides> {
 }
 
 async function createResults () {
+    // const override = await getOverrides()
+    // if (override) console.log(override)
     fs.createReadStream('input/results-input.csv')
         .pipe(parse({
             delimiter: ', '
